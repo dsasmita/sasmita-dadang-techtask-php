@@ -26,6 +26,10 @@ check:
 phpstan:
 	vendor/bin/phpstan analyze --memory-limit=1G -l 7 src
 
+test-coverage:
+	php -d extension=xdebug.so -d xdebug.profiler_enable=on ././bin/phpunit --stop-on-failure --log-junit 'coverage/unitreport.xml' --coverage-html coverage --coverage-text=coverage/unitreport.txt --coverage-clover coverage/clover.xml
+	cat coverage/unitreport.txt
+
 scan:
 	make check
 	make phpstan

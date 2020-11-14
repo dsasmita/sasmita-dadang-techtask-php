@@ -9,6 +9,8 @@ RUN apt-get install -y zlib1g-dev libpq-dev git libicu-dev libxml2-dev \
     && docker-php-ext-install pdo pdo_pgsql pgsql \
     && docker-php-ext-install zip xml
 
+RUN pecl install xdebug && docker-php-ext-enable xdebug
+
 RUN curl --insecure https://getcomposer.org/download/1.6.5/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 
 # Set timezone
