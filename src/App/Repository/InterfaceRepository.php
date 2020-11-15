@@ -4,5 +4,8 @@ namespace App\Repository;
 
 interface InterfaceRepository
 {
-    public function readJsonFile($path) : object;
+    /**
+     * @param string $path
+     */
+    public function readJsonFile($path): object;
 }

@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Service\PayslipComputation;
+use App\Service\MenuIngredient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\MenuIngredient;
 
 /**
  * @Route("/lunch")
@@ -16,8 +16,12 @@ class LunchController extends AbstractController
     /**
      * @Route("/", name="lunch")
      */
-    public function index(MenuIngredient $menuIngredient): JsonResponse
+    public function index(Request $request, MenuIngredient $menuIngredient): JsonResponse
     {
-        return $this->json($menuIngredient->getMenu('date'));
+        $date = $request->query->get('date', date('Y-m-d'));
+
+        return $this->json(
+            $menuIngredient->getMenu($date)
+        );
     }
 }

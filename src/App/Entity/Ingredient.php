@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
-class Ingredient{
-
+class Ingredient
+{
+    /**
+     * @var string
+     */
     private $title;
 
     /**
