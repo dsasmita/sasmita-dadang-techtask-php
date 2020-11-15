@@ -44,7 +44,7 @@ class RecipeRepository extends BaseRepository
         foreach ($this->data as $recipe) {
             $data = (object) [];
             $data->title = $recipe->getTitle();
-            $data->useBy = $recipe->getIngredients();
+            $data->ingredients = $recipe->getIngredients();
 
             $data_collection[] = $data;
         }

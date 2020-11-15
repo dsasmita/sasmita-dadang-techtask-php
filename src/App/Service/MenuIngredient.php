@@ -71,7 +71,7 @@ class MenuIngredient
         foreach ($recipes as $recipe) {
             $bestBefore = null;
             $isRecipeAvailable = true;
-            foreach ($recipe->useBy as $useByRecipeIngredient) {
+            foreach ($recipe->ingredients as $useByRecipeIngredient) {
                 if (!array_key_exists($useByRecipeIngredient, $availableIngredients)) {
                     $isRecipeAvailable = false;
                     break;

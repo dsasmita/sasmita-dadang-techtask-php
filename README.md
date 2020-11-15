@@ -1,48 +1,104 @@
-__Language :__ English | [Bahasa Indonesia](README_ID.md)
+**Language :** English
 
-# PHP Technical Task
+# Description
+
 Suggested recipes for lunch API
 
-## Time management
-There is no deadline to do this tech task. It's up to you how you manage your time to accomplish at least the requirements.
+## Installation
 
-## Assessment
+- Clone this repository.
 
-Our assessment criteria will pay attention on:
-- How the application is structured.
-- Code quality (Clean code).
-- Quality of tests.
-- Interpretation of the problem.
-- Use of `git`.
-- Implementation and final execution.
-- Commits, as this will allow us to understand some of the decisions you make throughout the process.
+```bash
+git clone git@github.com:dsasmita/sasmita-dadang-techtask-php.git
+cd sasmita-dadang-techtask-php
+```
 
-## User Story
-As a User I would like to make a request to an API that will determine from a set of recipes what I can have for lunch today based on the contents of my fridge, so that I quickly decide what I’ll be having.
+- Run the setup command to setup the containers.
 
-__Acceptance Criteria__
-- Given that I have made a request to the `/lunch` endpoint I should receive a `JSON` response of the recipes 
-that I can prepare based on the availability of ingredients in my fridge.
-- Given that an ingredient is past its `use-by` date (inclusive), I should not receive recipes containing this ingredient.
-- Given that an ingredient is past its `best-before` date (inclusive), but is still within its `use-by` date (inclusive), any recipe containing the oldest (less fresh) ingredient should placed at the bottom of the response object.
+```bash
+make setup
+```
 
-__Additional Criteria__
-- The application SHOULD contains unit / integration tests (e.g. `PHPUnit`).
-- The application MUST be completed using an `OOP` approach.
-- The application MUST be `PSR` compliant.
-- Any dependencies MUST be installed using `Composer` (no need to commit dependencies, the
-composer.lock file will be sufficient).
-- Use `PHP5.6` or `PHP7`.
-- Any installation, build steps, testing and usage instructions MUST be provided in a `README.md` file in the root of the application.
+- Run init command to initialize the application. When done you will inside docker bash
 
-## Framework
-Use the `Symfony micro framework` (https://symfony.com/doc/current/setup.html) to create the application API. 
+```bash
+make init
+```
 
-## Application Data
-For the purpose of this task, the application should simply read data from 2 x JSON files. The contents for these files can be found [here](src/App/Ingredient/data.json) and [here](src/App/Recipe/data.json).
- 
-## Submission
-The application should be committed to a __public repository__ on `GitHub` or `BitBucket` (`<lastname>-<firstname>-techtask-php`) and simply send us a link to the repository.
+- after that can check [http://127.0.0.1:8080/lunch/?date=2019-03-07](http://127.0.0.1:8080/lunch/?date=2019-03-07)
+  result for this will be
 
-## Bonus
-Configure a `Docker` environment so that we can test and run the application quickly. The application should be installed with a single command.
+```json
+{
+  "date": "2019-03-07",
+  "availableRecipes": [
+    {
+      "title": "Hotdog",
+      "ingredients": ["Hotdog Bun", "Sausage", "Ketchup", "Mustard"],
+      "bestBefore": "2019-03-25"
+    },
+    {
+      "title": "Ham and Cheese Toastie",
+      "ingredients": ["Ham", "Cheese", "Bread", "Butter"],
+      "bestBefore": "2019-03-08"
+    },
+    {
+      "title": "Salad",
+      "ingredients": [
+        "Lettuce",
+        "Tomato",
+        "Cucumber",
+        "Beetroot",
+        "Salad Dressing"
+      ],
+      "bestBefore": "2019-03-06"
+    }
+  ]
+}
+```
+
+## Test and linter
+
+### PHP unit
+
+You can run the PHPUnit test using the command below.
+
+```bash
+make test
+```
+
+To run with coverage, use the command below.
+
+```bash
+make test-coverage
+```
+
+Open folder `coverage` in the application's root directory. and open with browser `coverage/index.html`.
+
+### PHP Fixer
+
+To check the coding standards issues using PHP Fixer, run the command below.
+
+```bash
+make check
+```
+
+To fix coding standards issues run the command below.
+
+```bash
+make lint
+```
+
+### PHP Stan
+
+To check PHP Static Analysis Tool run the command below.
+
+```bash
+make phpstan
+```
+
+## Destroying container
+
+```bash
+make destroy
+```
